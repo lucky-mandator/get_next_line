@@ -1,3 +1,5 @@
 a.out
 *.swap
 *.o
+*.txt
+.DS_Store

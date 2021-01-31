@@ -6,39 +6,38 @@
 /*   By: saluru <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:27:20 by saluru            #+#    #+#             */
-/*   Updated: 2021/01/26 12:53:27 by saluru           ###   ########.fr       */
+/*   Updated: 2021/01/31 12:12:34 by saluru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "get_next_line_utils.c"
-
 int get_next_line(int fd, char **line)
 {
-	char	**buff;
+	char	*buff;
+	char	*n;
+	int		rd;
 
-	*buff = (char *)malloc(sizeof(*line));
-	printf("%s", *line);
+	buff = (char *)malloc(sizeof(char)*(BUFFER_SIZE + 1));
+	while ((read(fd, buff, BUFFER_SIZE)))
+	{
+		if((n = ft_strchr(buff,'\n')))
+		{
+			*n = '\0';
+		}
+		*line = ft_strjoin(*line, buff);
+	}
+	free(buff);
 	return (0);
 }
 
-int main(void)
 /*
-
 int main(void)
 {
-	char	*word;
-	char	**sentence;
+	int	fd;
+	char	*line;
 
-	word = (char *)malloc(4 * sizeof *word); // assume it worked
-    strcpy(word, "foo sai\n");
-
-    sentence = (char **)malloc(4 * sizeof *sentence); // assume it worked
-    sentence[0] = word;
-    sentence[1] = word;
-    sentence[2] = word;
-    sentence[3] = NULL;
-	get_next_line(1, sentence);
-}*/
+	fd = open("text.txt", O_RDONLY);
+	get_next_line(fd, &line);
+	printf("%s", line);
+	return (0);
+}
+*/
