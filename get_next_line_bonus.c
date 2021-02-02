@@ -6,7 +6,7 @@
 /*   By: saluru <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 14:33:14 by saluru            #+#    #+#             */
-/*   Updated: 2021/02/01 14:42:44 by saluru           ###   ########.fr       */
+/*   Updated: 2021/02/02 12:00:54 by saluru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ int		get_next_line(int fd, char **line)
 {
 	char		*buff;
 	int			rd;
-	static char	*rest;
+	static char	*rest[256];
 
 	rd = 1;
-	if (fd < 0 || !line || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > 256 || !line || BUFFER_SIZE <= 0)
 		return (-1);
 	if (!(buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (-1);
-	while (!has_return(rest) && rd != 0)
+	while (!has_return(rest[fd]) && rd != 0)
 	{
 		if ((rd = read(fd, buff, BUFFER_SIZE)) == -1)
 		{
@@ -58,11 +58,11 @@ int		get_next_line(int fd, char **line)
 			return (-1);
 		}
 		buff[rd] = '\0';
-		rest = ft_strjoin(rest, buff);
+		rest[fd] = ft_strjoin(rest[fd], buff);
 	}
 	free(buff);
-	*line = ft_strcpy(rest);
-	rest = trim_rest(rest);
+	*line = ft_strcpy(rest[fd]);
+	rest = trim_rest(rest[fd]);
 	if (rd == 0)
 		return (0);
 	return (1);
