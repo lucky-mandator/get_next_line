@@ -6,7 +6,7 @@
 /*   By: saluru <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 14:33:14 by saluru            #+#    #+#             */
-/*   Updated: 2021/02/02 12:00:54 by saluru           ###   ########.fr       */
+/*   Updated: 2021/02/02 12:08:12 by saluru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		get_next_line(int fd, char **line)
 	}
 	free(buff);
 	*line = ft_strcpy(rest[fd]);
-	rest = trim_rest(rest[fd]);
+	rest[fd] = trim_rest(rest[fd]);
 	if (rd == 0)
 		return (0);
 	return (1);
